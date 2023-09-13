@@ -33,6 +33,22 @@ const routes = [
             /* webpackChunkName: "table" */ "../views/table/virtualTable.vue"
           ),
       },
+      {
+        path: "editTable",
+        name: "editTable",
+        component: () =>
+          import(
+            /* webpackChunkName: "table" */ "../views/table/editTable.vue"
+          ),
+      },
+      {
+        path: "manualTrigger",
+        name: "manualTrigger",
+        component: () =>
+          import(
+            /* webpackChunkName: "table" */ "../views/table/manualTrigger.vue"
+          ),
+      },
     ],
   },
 ];

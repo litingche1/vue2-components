@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       rowHeight: 50,
-      height: 400,
+      height: 700,
       columns: [
         {
           prop: "id",
@@ -65,11 +65,16 @@ export default {
       this.$refs.plTable.$children[0].reloadData(data);
     },
   },
+  mounted() {
+    // this.getTableListData()
+    this.setData(10000);
+  },
 };
 </script>
 
 <template>
   <section class="virtualTable-wrap">
+    <h1>虚拟列表表格</h1>
     <v-virtual-table
       :tableHead="columns"
       ref="plTable"
@@ -87,4 +92,12 @@ export default {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+.virtualTable-wrap {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+</style>

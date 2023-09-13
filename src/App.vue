@@ -11,7 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  width: 98.5vw;
+  width: 100vw;
   height: 98.3vh;
   box-sizing: border-box;
 }
