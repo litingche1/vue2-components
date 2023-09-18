@@ -41,16 +41,13 @@ export default {
               <el-menu-item index="/table/v-table"
                 >element普通表格组件</el-menu-item
               >
-              <el-menu-item index="/table/virtualTable"
-                >虚拟列表表格(umy-ui)</el-menu-item
-              >
+              <!--              <el-menu-item index="/table/virtualTable"-->
+              <!--                >虚拟列表表格(umy-ui)</el-menu-item-->
+              <!--              >-->
             </el-menu-item-group>
             <el-menu-item-group title="编辑表格">
               <el-menu-item index="/table/editTable"
                 >点击触发(umy-ui)</el-menu-item
-              >
-              <el-menu-item index="/table/editTable"
-                >手动触发(umy-ui)</el-menu-item
               >
             </el-menu-item-group>
             <el-menu-item-group title="表格导出方法">

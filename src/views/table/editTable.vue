@@ -237,6 +237,7 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   h1 {
     text-align: center;
