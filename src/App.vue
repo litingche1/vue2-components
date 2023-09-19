@@ -12,7 +12,7 @@
   text-align: center;
   color: #2c3e50;
   width: 100vw;
-  height: 98.3vh;
+  height: 100vh;
   box-sizing: border-box;
 }
 </style>

@@ -3,7 +3,7 @@ export default {
   name: "virtualTable",
   data() {
     return {
-      rowHeight: 50,
+      rowHeight: 55,
       height: 700,
       columns: [
         {
@@ -66,8 +66,10 @@ export default {
     },
   },
   mounted() {
-    // this.getTableListData()
     this.setData(10000);
+    this.$nextTick(() => {
+      this.height = this.$refs.tableBox.clientHeight;
+    });
   },
 };
 </script>
@@ -75,20 +77,22 @@ export default {
 <template>
   <section class="virtualTable-wrap">
     <h1>虚拟列表表格</h1>
-    <v-virtual-table
-      :tableHead="columns"
-      ref="plTable"
-      :max-height="height"
-      @table-body-scroll="tableScroll"
-      :row-height="rowHeight"
-    >
-      <u-table-column type="index" width="100" fixed align="center" />
-      <template v-slot:operating="slotData">
-        <el-button size="mini" type="danger">删除</el-button>
-        {{ slotData.data }}
-        <el-button size="mini" type="success">编辑</el-button>
-      </template>
-    </v-virtual-table>
+    <article class="table-box-con" ref="tableBox">
+      <v-virtual-table
+        :tableHead="columns"
+        ref="plTable"
+        :max-height="height"
+        @table-body-scroll="tableScroll"
+        :row-height="rowHeight"
+      >
+        <u-table-column type="index" width="100" fixed align="center" />
+        <template v-slot:operating="slotData">
+          <el-button size="mini" type="danger">删除</el-button>
+          {{ slotData.data }}
+          <el-button size="mini" type="success">编辑</el-button>
+        </template>
+      </v-virtual-table>
+    </article>
   </section>
 </template>
 
@@ -98,6 +102,11 @@ export default {
   height: 100%;
   box-sizing: border-box;
   display: flex;
+  padding: 10px;
   flex-direction: column;
+  background: #fff;
+  .table-box-con {
+    flex: 1;
+  }
 }
 </style>

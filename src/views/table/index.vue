@@ -57,6 +57,7 @@ export default {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  background: #fff;
 
   h1 {
     text-align: center;
@@ -67,8 +68,9 @@ export default {
     position: relative;
     .table-box {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: calc(100% - 20px) !important;
+      left: 10px;
+      height: calc(100% - 10px) !important;
     }
   }
 }

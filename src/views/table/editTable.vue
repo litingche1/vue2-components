@@ -54,9 +54,13 @@ export default {
           ],
         },
       ],
+      height: 700,
     };
   },
   mounted() {
+    this.$nextTick(() => {
+      this.height = this.$refs.tableBox2.clientHeight;
+    });
     // 延迟加载
     setTimeout(() => {
       this.columns = Array.from({ length: 200 }, (_, idx) => ({
@@ -145,90 +149,92 @@ export default {
       5.最后呢，你需要在列上自定义编辑时的渲染模板，v-slot:edit代表是自定义编辑时显示的视图,
       v-slot:header是自定义头部啦
     </div>
-    <ux-grid
-      border
-      show-overflow
-      ref="plxTable"
-      keep-source
-      height="700"
-      :highlightCurrentRow="false"
-      :edit-config="{ trigger: 'click', mode: 'cell' }"
-    >
-      <ux-table-column type="checkbox" width="60"></ux-table-column>
-      <ux-table-column type="index" width="80"></ux-table-column>
-      <ux-table-column field="name" title="名字" min-width="140" edit-render>
-        <template v-slot:edit="scope">
-          <el-input v-model="scope.row.name"></el-input>
-        </template>
-      </ux-table-column>
-      <ux-table-column field="age" title="年龄" width="160">
-        <template v-slot:header="{ column }">
-          <span>{{ column.title }}</span>
-        </template>
-      </ux-table-column>
-      <ux-table-column field="sex" title="性别" width="140" edit-render>
-        <template v-slot:edit="scope">
-          <el-select
-            v-model="scope.row.sex"
-            @change="$refs.plxTable.updateStatus(scope)"
-          >
-            <el-option
-              v-for="item in sexList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </template>
-        <template v-slot="{ row }">{{ getLabel(row.sex) }}</template>
-      </ux-table-column>
-      <ux-table-column field="time" title="时间" width="140" edit-render>
-        <template v-slot:edit="scope">
-          <el-time-select
-            style="width: 100%"
-            v-model="scope.row.time"
-            :picker-options="{
-              start: '08:30',
-              step: '00:15',
-              end: '18:30',
-            }"
-            placeholder="选择时间"
-          >
-          </el-time-select>
-        </template>
-      </ux-table-column>
-      <ux-table-column field="address" title="地址" width="250" edit-render>
-        <!--这个呢是编辑状态下的方式-->
-        <template v-slot:edit="scope">
-          <el-cascader
-            v-model="scope.row.address"
-            :options="options"
-          ></el-cascader>
-        </template>
-        <!--这个代表是自定义行中的显示（因为我需要对我，el-cascader选出来的信息进行转换，选出来是个数组）-->
-        <template v-slot="{ row }">{{
-          getCascader(row.address, options)
-        }}</template>
-      </ux-table-column>
-      <ux-table-column field="single" title="单身狗?" width="80">
-        <!--这个呢是编辑状态下的方式-->
-        <template v-slot="scope">
-          <el-switch
-            v-model="scope.row.single"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-          >
-          </el-switch>
-        </template>
-      </ux-table-column>
-      <ux-table-column title="操作" width="120">
-        <template v-slot="{ row }">
-          <el-button @click="saveEvent(row)">保存</el-button>
-        </template>
-      </ux-table-column>
+    <article class="table-box-con" ref="tableBox2">
+      <ux-grid
+        border
+        show-overflow
+        ref="plxTable"
+        keep-source
+        :height="height"
+        :highlightCurrentRow="false"
+        :edit-config="{ trigger: 'click', mode: 'cell' }"
+      >
+        <ux-table-column type="checkbox" width="60"></ux-table-column>
+        <ux-table-column type="index" width="80"></ux-table-column>
+        <ux-table-column field="name" title="名字" min-width="140" edit-render>
+          <template v-slot:edit="scope">
+            <el-input v-model="scope.row.name"></el-input>
+          </template>
+        </ux-table-column>
+        <ux-table-column field="age" title="年龄" width="160">
+          <template v-slot:header="{ column }">
+            <span>{{ column.title }}</span>
+          </template>
+        </ux-table-column>
+        <ux-table-column field="sex" title="性别" width="140" edit-render>
+          <template v-slot:edit="scope">
+            <el-select
+              v-model="scope.row.sex"
+              @change="$refs.plxTable.updateStatus(scope)"
+            >
+              <el-option
+                v-for="item in sexList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </template>
+          <template v-slot="{ row }">{{ getLabel(row.sex) }}</template>
+        </ux-table-column>
+        <ux-table-column field="time" title="时间" width="140" edit-render>
+          <template v-slot:edit="scope">
+            <el-time-select
+              style="width: 100%"
+              v-model="scope.row.time"
+              :picker-options="{
+                start: '08:30',
+                step: '00:15',
+                end: '18:30',
+              }"
+              placeholder="选择时间"
+            >
+            </el-time-select>
+          </template>
+        </ux-table-column>
+        <ux-table-column field="address" title="地址" width="250" edit-render>
+          <!--这个呢是编辑状态下的方式-->
+          <template v-slot:edit="scope">
+            <el-cascader
+              v-model="scope.row.address"
+              :options="options"
+            ></el-cascader>
+          </template>
+          <!--这个代表是自定义行中的显示（因为我需要对我，el-cascader选出来的信息进行转换，选出来是个数组）-->
+          <template v-slot="{ row }">{{
+            getCascader(row.address, options)
+          }}</template>
+        </ux-table-column>
+        <ux-table-column field="single" title="单身狗?" width="80">
+          <!--这个呢是编辑状态下的方式-->
+          <template v-slot="scope">
+            <el-switch
+              v-model="scope.row.single"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+            >
+            </el-switch>
+          </template>
+        </ux-table-column>
+        <ux-table-column title="操作" width="120">
+          <template v-slot="{ row }">
+            <el-button @click="saveEvent(row)">保存</el-button>
+          </template>
+        </ux-table-column>
 
-      <!--试试多个,先搞个v-if隐藏掉，反正可以支持大量的列，列多了我眼睛花，注释掉了哈！！！-->
-    </ux-grid>
+        <!--试试多个,先搞个v-if隐藏掉，反正可以支持大量的列，列多了我眼睛花，注释掉了哈！！！-->
+      </ux-grid>
+    </article>
   </div>
 </template>
 
@@ -239,9 +245,14 @@ export default {
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
+  padding: 10px;
+  background: #fff;
   h1 {
     text-align: center;
     margin-bottom: 20px;
+  }
+  .table-box-con {
+    flex: 1;
   }
 }
 </style>
