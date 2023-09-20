@@ -49,6 +49,38 @@ const routes = [
             /* webpackChunkName: "table" */ "../views/table/manualTrigger.vue"
           ),
       },
+      {
+        path: "insertRow",
+        name: "insertRow",
+        component: () =>
+          import(
+            /* webpackChunkName: "table" */ "../views/table/insertRow.vue"
+          ),
+      },
+      {
+        path: "inputBoxes",
+        name: "inputBoxes",
+        component: () =>
+          import(
+            /* webpackChunkName: "table" */ "../views/table/inputBoxes.vue"
+          ),
+      },
+      {
+        path: "tableValidation",
+        name: "tableValidation",
+        component: () =>
+          import(
+            /* webpackChunkName: "table" */ "../views/table/tableValidation.vue"
+          ),
+      },
+      {
+        path: "tableExport",
+        name: "tableExport",
+        component: () =>
+          import(
+            /* webpackChunkName: "table" */ "../views/table/tableExport.vue"
+          ),
+      },
     ],
   },
 ];

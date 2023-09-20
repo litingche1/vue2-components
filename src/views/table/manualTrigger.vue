@@ -10,9 +10,13 @@ export default {
         { value: "nv", label: "女" },
         { value: "weizhi", label: "未知" },
       ],
+      height: 500,
     };
   },
   mounted() {
+    this.$nextTick(() => {
+      this.height = this.$refs.tableBox3.clientHeight;
+    });
     // 延迟加载
     this.tableData = Array.from({ length: 10 }, (_, idx) => ({
       id: idx + 1,
@@ -121,14 +125,27 @@ export default {
 
 <template>
   <section class="v-table-con">
-    <h1>表格组件</h1>
-    <article class="table-con-box">
+    <h1>
+      手动触发编辑表格(表格数据少，所以用data方式赋值表格数据。这是个示例)
+    </h1>
+    <div>
+      1.首先在ux-grid上绑定 keep-source属性，edit-config = {trigger: 'manual' //
+      手动触发，意思就是需要点击按钮调用方法触发， mode: 'row' // 作用点在谁身上
+      row表示行，cell: 表示单元格}<br />
+      2.通过表尾来实现合计功能，数据发生变化时实时统计，对于某些场景下如果需要频繁计算的可以手动调用
+      updateFooter 函数(如你去试试年龄那个单元格，加加减减试试看)<br />
+      3.如果你的表格数据量不大呢，你还可以合并列合并行。<br />
+      4.设置 keep-source
+      开启保持原始值状态，对于某些需要局部保存的场景，可以在数据保存完成后调用
+      reloadRow 方法加载行数据并恢复到初始状态
+    </div>
+    <article class="table-con-box" ref="tableBox3">
       <ux-grid
         border
         show-overflow
         ref="plxTable"
         keep-source
-        height="500"
+        height="height"
         :data="tableData"
         :highlightCurrentRow="false"
         show-summary
@@ -194,6 +211,7 @@ export default {
 .v-table-con {
   width: 100%;
   height: 100%;
+  padding: 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

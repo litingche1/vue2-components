@@ -45,9 +45,21 @@ export default {
         </el-menu-item-group>
         <el-menu-item-group title="编辑表格">
           <el-menu-item index="/table/editTable">点击触发(umy-ui)</el-menu-item>
+          <el-menu-item index="/table/manualTrigger"
+            >手动触发(umy-ui)</el-menu-item
+          >
+          <el-menu-item index="/table/insertRow">插入行(umy-ui)</el-menu-item>
+          <el-menu-item index="/table/inputBoxes"
+            >输入框全部显示(umy-ui)</el-menu-item
+          >
+          <el-menu-item index="/table/tableValidation"
+            >表格校验(umy-ui)</el-menu-item
+          >
         </el-menu-item-group>
         <el-menu-item-group title="表格导出方法">
-          <el-menu-item index="1-5">选项3</el-menu-item>
+          <el-menu-item index="/table/tableExport"
+            >纯前端导出element表格</el-menu-item
+          >
         </el-menu-item-group>
         <el-menu-item index="2">
           <i class="el-icon-menu"></i>
